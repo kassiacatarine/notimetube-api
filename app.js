@@ -12,15 +12,12 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv-safe').load();
 }
 
-const mongoose = require('mongoose');
+import {
+  Mongo
+} from './database/mongo';
 
-mongoose.Promise = global.Promise;
-
-mongoose.connect(process.env.DB_URL, {
-    useNewUrlParser: true
-  })
-  .then(() => console.log('connection succesful'))
-  .catch((err) => console.error(err));
+const mongo = new Mongo();
+mongo.connection(process.env.DB_IN_MEMORY === 'true');
 
 const app = express();
 
