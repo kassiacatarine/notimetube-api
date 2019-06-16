@@ -1,3 +1,7 @@
+import {
+  Mongo
+} from './database/mongo';
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -12,10 +16,6 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv-safe').load();
 }
 
-import {
-  Mongo
-} from './database/mongo';
-
 const mongo = new Mongo();
 mongo.connection(process.env.DB_IN_MEMORY === 'true');
 
@@ -28,7 +28,7 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: false
+  extended: false,
 }));
 app.use(cookieParser());
 app.use(sassMiddleware({
