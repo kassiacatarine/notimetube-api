@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const indexRouter = require('./api/routes/index');
+const usersRouter = require('./api/routes/users');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv-safe').load();
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 import {
   Mongo
-} from './database/mongo';
+} from './api/database/mongo';
 
 const mongo = new Mongo();
 mongo.connection(process.env.DB_IN_MEMORY === 'true');
