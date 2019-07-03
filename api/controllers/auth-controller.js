@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
     res.json({
       title: 'Login Successful',
       detail: 'Successfully validated user credentials',
-      token: user.toAuthJSON(),
+      userAuth: user.toAuthJSON(),
     });
   } catch (err) {
     res.status(401).json({
