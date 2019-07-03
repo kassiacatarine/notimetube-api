@@ -8,6 +8,7 @@ const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 
 const indexRouter = require('./api/routes/index');
+const authRouter = require('./api/routes/auth');
 const usersRouter = require('./api/routes/users');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -30,14 +31,15 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'api/public'),
+  dest: path.join(__dirname, 'api/public'),
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true,
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'api/public')));
 
 app.use('/', indexRouter);
+app.use('/', authRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
