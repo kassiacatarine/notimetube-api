@@ -1,22 +1,22 @@
 const express = require('express');
+
 const router = express.Router();
 const User = require('../models/user');
+const Validators = require('../utils/validators');
 
 router.post('/register', async (req, res) => {
   try {
     const {
       email,
-      password
+      password,
     } = req.body;
-    if (!isEmail(email)) {
+    if (!Validators.isEmail(email)) {
       throw new Error('Email must be a valid email address.');
     }
     if (typeof password !== 'string') {
       throw new Error('Password must be a string.');
     }
-    const user = new User({
-      email
-    });
+    const user = new User({ email });
     user.setPassword(password);
     await user.save();
 
@@ -39,9 +39,9 @@ router.post('/login', async (req, res) => {
   try {
     const {
       email,
-      password
+      password,
     } = req.body;
-    if (!isEmail(email)) {
+    if (!Validators.isEmail(email)) {
       return res.status(400).json({
         errors: [{
           title: 'Bad Request',
@@ -57,9 +57,7 @@ router.post('/login', async (req, res) => {
         }],
       });
     }
-    const user = await User.findOne({
-      email
-    });
+    const user = await User.findOne({ email });
     if (!user) {
       throw new Error();
     }
