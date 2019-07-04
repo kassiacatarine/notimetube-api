@@ -63,6 +63,27 @@ exports.videos = async (req, res) => {
   }
 };
 
+exports.video = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const video = await Video.findById(id);
+
+    if (!video) {
+      throw new Error('Video must be a valid file.');
+    }
+
+    res.status(201).json(video);
+  } catch (err) {
+    res.status(400).json({
+      errors: [{
+        title: 'Find Video Error',
+        detail: 'Something went wrong during find video process.',
+        errorMessage: err.message,
+      }],
+    });
+  }
+};
+
 exports.delete = async (req, res) => {
   try {
     const { id } = req.params;

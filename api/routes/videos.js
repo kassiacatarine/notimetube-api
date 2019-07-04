@@ -28,6 +28,8 @@ router.post('/', upload.single('videoUpload'), videoController.upload);
 
 router.get('/', videoController.videos);
 
+router.get('/:id', videoController.video);
+
 router.delete('/:id', videoController.delete);
 
 module.exports = router;
