@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Validators = require('../utils/validators');
+const userController = require('./user-controller');
 
 exports.register = async (req, res) => {
   try {
@@ -13,6 +14,9 @@ exports.register = async (req, res) => {
     }
     if (typeof password !== 'string') {
       throw new Error('Password must be a string.');
+    }
+    if (await userController.validateEmailAccessibility(email)) {
+      throw new Error('The email must be a unique address.');
     }
     const user = new User({ name, email });
     user.setPassword(password);
@@ -79,4 +83,4 @@ exports.login = async (req, res) => {
       }],
     });
   }
-}
+};

@@ -16,6 +16,11 @@ exports.users = async (req, res) => {
   }
 };
 
+exports.validateEmailAccessibility = async (email) => {
+  const result = await User.findOne({ email });
+  return result !== null;
+};
+
 exports.deleteMany = async (req, res) => {
   try {
     const users = await User.deleteMany();

@@ -10,6 +10,7 @@ const sassMiddleware = require('node-sass-middleware');
 const indexRouter = require('./api/routes/index');
 const authRouter = require('./api/routes/auth');
 const usersRouter = require('./api/routes/users');
+const videosRouter = require('./api/routes/videos');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv-safe').load();
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'api/public')));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/users', usersRouter);
+app.use('/videos', videosRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
