@@ -38,7 +38,7 @@ app.use(sassMiddleware({
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true,
 }));
-app.use(express.static(path.join(__dirname, 'api/public')));
+app.use('/api/public', express.static(path.join(__dirname, 'api/public')));
 app.use(cors());
 app.use('/', indexRouter);
 app.use('/', authRouter);
