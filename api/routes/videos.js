@@ -26,4 +26,8 @@ const videoController = require('../controllers/video-controller');
 
 router.post('/', upload.single('videoUpload'), videoController.upload);
 
+router.get('/', videoController.videos);
+
+router.delete('/:id', videoController.delete);
+
 module.exports = router;

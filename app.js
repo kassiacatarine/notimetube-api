@@ -39,7 +39,7 @@ app.use(sassMiddleware({
   sourceMap: true,
 }));
 app.use(express.static(path.join(__dirname, 'api/public')));
-app.use(cors())
+app.use(cors());
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/users', usersRouter);
