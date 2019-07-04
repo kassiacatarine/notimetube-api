@@ -22,4 +22,14 @@ const VideoSchema = mongoose.Schema({
   },
 });
 
+VideoSchema.index({
+  name: 'text',
+  description: 'text',
+}, {
+    weights: {
+      name: 5,
+      description: 1,
+    },
+  });
+
 module.exports = mongoose.model('Video', VideoSchema);

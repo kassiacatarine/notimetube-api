@@ -49,7 +49,10 @@ exports.upload = async (req, res) => {
 
 exports.videos = async (req, res) => {
   try {
-    const videos = await Video.find();
+    const { search } = req.query;
+    console.log(search);
+
+    const videos = search === undefined ? await Video.find() : await Video.find({ $text: { $search: search, $caseSensitive: false } });
 
     res.status(201).json(videos);
   } catch (err) {
