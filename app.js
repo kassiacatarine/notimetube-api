@@ -6,6 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
+const cors = require('cors');
 
 const indexRouter = require('./api/routes/index');
 const authRouter = require('./api/routes/auth');
@@ -38,7 +39,7 @@ app.use(sassMiddleware({
   sourceMap: true,
 }));
 app.use(express.static(path.join(__dirname, 'api/public')));
-
+app.use(cors())
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/users', usersRouter);
