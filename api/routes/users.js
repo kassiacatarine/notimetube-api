@@ -1,6 +1,8 @@
 const express = require('express');
+
 const router = express.Router();
 const userController = require('../controllers/user-controller');
+const auth = require('../midlewares/auth');
 
 // /* GET users listing. */
 // router.get('/', function (req, res, next) {
@@ -8,9 +10,9 @@ const userController = require('../controllers/user-controller');
 // });
 
 /* GET ALL USERS */
-router.get('/', userController.users);
-
-router.delete('/', userController.deleteMany);
+router
+  .get('/', auth, userController.users)
+  .delete('/', auth, userController.deleteMany);
 
 // /* GET SINGLE USER BY ID */
 // router.get('/:id', function (req, res, next) {

@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 
 const router = express.Router();
+const videoController = require('../controllers/video-controller');
+const auth = require('../midlewares/auth');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -22,14 +24,11 @@ const fileFilter = (req, file, cb) => {
 };
 
 const upload = multer({ storage, fileFilter });
-const videoController = require('../controllers/video-controller');
 
-router.post('/', upload.single('videoUpload'), videoController.upload);
-
-router.get('/', videoController.videos);
-
-router.get('/:id', videoController.video);
-
-router.delete('/:id', videoController.delete);
+router
+  .post('/', auth, upload.single('videoUpload'), videoController.upload)
+  .get('/', auth, videoController.videos)
+  .get('/:id', auth, videoController.video)
+  .delete('/:id', auth, videoController.delete);
 
 module.exports = router;
