@@ -1,4 +1,3 @@
-import { Mongo } from './api/database/mongo';
 
 const createError = require('http-errors');
 const express = require('express');
@@ -8,6 +7,7 @@ const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const cors = require('cors');
 
+const Mongo = require('./api/database/mongo');
 const indexRouter = require('./api/routes/index');
 const authRouter = require('./api/routes/auth');
 const usersRouter = require('./api/routes/users');

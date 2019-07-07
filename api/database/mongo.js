@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
-export class Mongo {
+class Mongo {
 
   Mongo() {
     mongoose.Promise = Promise;
@@ -38,3 +38,5 @@ export class Mongo {
     });
   }
 }
+
+module.exports = Mongo;
