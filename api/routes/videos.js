@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, 'api/public/uploads/videos');
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + file.originalname);
+    cb(null, (new Date().toISOString().replace(':', '-') + file.originalname));
   },
 });
 
@@ -26,7 +26,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 router
-  .post('/', auth, upload.single('videoUpload'), videoController.upload)
+  .post('/', auth, upload.single('file'), videoController.upload)
   .get('/', auth, videoController.videos)
   .get('/:id', auth, videoController.video)
   .delete('/:id', auth, videoController.delete);

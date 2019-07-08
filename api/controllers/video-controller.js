@@ -27,7 +27,7 @@ exports.upload = async (req, res) => {
       description,
       uploadUser,
       uploadDate: new Date(),
-      file: req.file.path,
+      file: req.file.path.replace(':', '-'),
     });
 
     await video.save();
