@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, 'api/public/uploads/videos');
   },
   filename: (req, file, cb) => {
-    cb(null, (new Date().toISOString().replace(':', '-') + file.originalname));
+    cb(null, (`${new Date().toISOString()}${file.originalname}`));
   },
 });
 
